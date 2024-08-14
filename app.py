@@ -29,22 +29,23 @@ with col3:
     container3 = st.container(border=False)
     btn3 = container3.button("Create account", type='primary', use_container_width=True)
 
-if(btn1 or btn2):
-    uid = st.text_input(
-        label="**Admin ID**"*btn1 or "**User ID**"*btn2,
-        placeholder="admin id"*btn1 or "user id"*btn2
-    )
-    pwd = st.text_input(label="**Password**", placeholder="password", type="password")
-    with st.columns([0.25,0.5,0.25])[1]:
-        submit = st.button("submit", type='primary', use_container_width=True)
+while(!submit):
+    if(btn1 or btn2):
+        uid = st.text_input(
+            label="**Admin ID**"*btn1 or "**User ID**"*btn2,
+            placeholder="admin id"*btn1 or "user id"*btn2
+        )
+        pwd = st.text_input(label="**Password**", placeholder="password", type="password")
+        with st.columns([0.25,0.5,0.25])[1]:
+            submit = st.button("submit", type='primary', use_container_width=True)
 
-elif(btn3):
-    name = st.text_input(label="**Full name**", placeholder="full name")
-    eid = st.text_input(label="**Unique employee ID**", placeholder="unique employee id")
-    uid = st.text_input(label="**Create your login ID**", placeholder="id")
-    pwd = st.text_input(label="**Create your Password**", placeholder="password", type="password")
-    with st.columns([0.25,0.5,0.25])[1]:
-        submit = st.button("submit", type='primary', use_container_width=True)
+    elif(btn3):
+        name = st.text_input(label="**Full name**", placeholder="full name")
+        eid = st.text_input(label="**Unique employee ID**", placeholder="unique employee id")
+        uid = st.text_input(label="**Create your login ID**", placeholder="id")
+        pwd = st.text_input(label="**Create your Password**", placeholder="password", type="password")
+        with st.columns([0.25,0.5,0.25])[1]:
+            submit = st.button("submit", type='primary', use_container_width=True)
 
 
 # # Path for any image to display
