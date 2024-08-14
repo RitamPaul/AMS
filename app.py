@@ -29,7 +29,7 @@ with col3:
     container3 = st.container(border=False)
     btn3 = container3.button("Create account", type='primary', use_container_width=True)
 
-while(!submit):
+while(not submit):
     if(btn1 or btn2):
         uid = st.text_input(
             label="**Admin ID**"*btn1 or "**User ID**"*btn2,
