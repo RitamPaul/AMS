@@ -1,3 +1,15 @@
 import streamlit as st
 
-st.subheader("**For profile related queries**")
+st.markdown(
+    '''<p style="
+    color:blue;
+    text-align:center;
+    letter-spacing:10px;
+    font-size:50px;
+    font-weight:bolder;
+    font-family:verdana;
+    ">
+    PROFILE
+    </p>''',
+    unsafe_allow_html = True
+)

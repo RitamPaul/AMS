@@ -1,3 +1,15 @@
 import streamlit as st
 
-st.subheader("**Admins will view task completion activity here**")
+st.markdown(
+    '''<p style="
+    color:blue;
+    text-align:center;
+    letter-spacing:10px;
+    font-size:50px;
+    font-weight:bolder;
+    font-family:verdana;
+    ">
+    TASK ACTIVITIES
+    </p>''',
+    unsafe_allow_html = True
+)

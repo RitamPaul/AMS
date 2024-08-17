@@ -46,7 +46,7 @@ if(st.session_state['role'] == None):
         st.text_input(
             label="**Admin ID**" if (btn==1) else ("**User ID**"),
             key='id',
-            value=None if (('id' not in st.session_state) or (st.session_state['id']==None)) else (st.session_state['id']),
+            # value=None if (('id' not in st.session_state) or (st.session_state['id']==None)) else (st.session_state['id']),
             placeholder='enter your id' if (('id' not in st.session_state) or (st.session_state['id']==None)) else (None)
         )
         st.text_input(
@@ -61,7 +61,12 @@ if(st.session_state['role'] == None):
                 st.session_state['role'] = 'admin' if (btn==1) else ('user')
                 st.rerun()
     elif(btn==3):
-        st.text_input(label="**Full name**", key='name', placeholder="enter your full name")
+        st.text_input(
+            label="**Full name**",
+            key='name',
+            # value=None if (('name' not in st.session_state) or (st.session_state['name']==None)) else (st.session_state['name']),
+            placeholder="enter your full name"
+        )
         st.text_input(label="**Unique employee ID**", key='eid', placeholder="enter your unique employee id")
         st.selectbox(label="**Choose your role**", options=['Admin','User'], key='reg_role', index=None, placeholder='choose an option')
         st.text_input(label="**Create your login ID**", key='uid', placeholder="id")
