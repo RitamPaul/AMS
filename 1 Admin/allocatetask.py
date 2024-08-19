@@ -15,15 +15,21 @@ st.html(
 
 st.session_state
 
-if 'imagenum' not in st.session_state:
-    st.session_state['imagenum'] = 1
+ind = st.session_state['ind']
 
+# task image uploader
 st.file_uploader(
     label='**Task image** (if any)',
-    key=f'taskimageadmin-{st.session_state['imagenum']}',
+    key=f'ADMINtaskimage-{ind}',
     accept_multiple_files=True,
 )
-imagecount = len(st.session_state[f'taskimageadmin-{st.session_state['imagenum']}']) if (st.session_state[f'taskimageadmin-{st.session_state['imagenum']}']!=None) else 0
+
+imagecount = 0
+if(st.session_state[f'ADMINtaskimage-{ind}'] != None):
+    imagecount = len(st.session_state[f'ADMINtaskimage-{ind}'])
+
+# popover to display task images
+# since it's a container, no need of key
 with st.popover(
     label='**Open this to see task images**' if imagecount>0 else '**No image uploaded**',
     disabled=imagecount==0,
@@ -31,55 +37,57 @@ with st.popover(
 ):
     if st.selectbox(
         label='**Choose the uploaded picture to display**',
-        key='taskimageviewer',
+        key=f'ADMINtaskimageview-{ind}',
         options=[f"image-{i+1}" for i in range(imagecount)],
+        index=None,
         placeholder='choose image number',
         disabled=imagecount == 0
     ):
-        string_sb = st.session_state['taskimageviewer']
-        imagenum = string_sb.split('-')[1]
-        st.image(st.session_state[f'taskimageadmin-{st.session_state['imagenum']}'][int(imagenum) - 1])
-topictags = st.multiselect(
-    label="**Task tag**",
-    options=['computer','network devices','wires/cables','bug fix'],
-    key='topictagadmin',
-    placeholder='choose the topic tags'
-)
+        imagenum = st.session_state[f'ADMINtaskimageview-{ind}'].split('-')[1]
+        st.image(st.session_state[f'ADMINtaskimage-{ind}'][int(imagenum) - 1])
+
+# task details
 st.text_input(
     label='**Task details**',
-    key='taskdetailsadmin',
+    key=f'ADMINtaskdetails-{ind}',
     placeholder='details of the task'
 )
+
+# task location
 st.text_input(
     label='**Location**',
-    key='issuelocationadmin',
+    key=f'ADMINtasklocation-{ind}',
     placeholder='building no. / floor no. / room no.'
 )
+
+# specific employee to allocate task
 st.multiselect(
     label='**Specific employee to alocate task** (if any)',
-    key='specificemployee',
+    key=f'ADMINallocatetask-{ind}',
     options=[""],
     placeholder='employee names will go here'
 )
+
+# task % completion
 st.slider(
     label='**Completion percentage (%)**',
-    key='taskcomplete',
+    key=f'ADMINtaskcomplete-{ind}',
     value=0,
     min_value=0,
     max_value=100,
     step=1
 )
 
+# submit 
 with st.columns([0.25,0.5,0.25])[1]:
-    if st.button(
-        label="submit",
-        type='primary',
-        use_container_width=True
-    ):
-        # list_attrib = ['taskimageadmin','taskimageviewer','topictagadmin','taskdetailsadmin','issuelocationadmin','specificemployee','taskcomplete']
-        # # only erase now
-        # for attrib in list_attrib:
-        #     st.session_state.attrib = None
-        # st.session_state.taskimageadmin = None
-        st.session_state['imagenum'] += 1
+    if st.button(label="submit", type='primary', use_container_width=True):
+        list_attrib = [
+            f'ADMINtaskimage-{ind}',        f'ADMINtaskimageview-{ind}',
+            f'ADMINtaskdetails-{ind}',      f'ADMINtasklocation-{ind}',
+            f'ADMINallocatetask-{ind}',     f'ADMINtaskcomplete-{ind}'
+        ]
+        # only erase now, later send to database
+        for attrib in list_attrib:
+            del st.session_state[attrib]
+        st.session_state['ind'] = not st.session_state['ind']
         st.rerun()

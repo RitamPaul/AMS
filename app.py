@@ -1,8 +1,11 @@
 import streamlit as st
 import os
 
-if 'role' not in st.session_state:
-    st.session_state['role'] = None
+for attrib in ['role','userid','password','ind']:
+    if attrib not in st.session_state:
+        st.session_state[attrib] = None
+# if 'ind' not in st.session_state:
+#     st.session_state['ind'] = 1
 
 # login page
 if(st.session_state['role'] == None):
@@ -20,8 +23,11 @@ if(st.session_state['role'] == None):
         unsafe_allow_html = True
     )
 
+    # greetings for successfully registered
     if('registered' in st.session_state):
         st.success("Congratulations! your account is successfully created", icon="✅")
+        st.balloons()
+        del st.session_state['registered']
 
     if 'btn' not in st.session_state:
         st.session_state['btn'] = None
@@ -46,7 +52,7 @@ if(st.session_state['role'] == None):
         st.text_input(
             label="**Admin ID**" if (btn==1) else ("**User ID**"),
             key='id',
-            # value=None if (('id' not in st.session_state) or (st.session_state['id']==None)) else (st.session_state['id']),
+            value=None if (('id' not in st.session_state) or (st.session_state['id']==None)) else (st.session_state['id']),
             placeholder='enter your id' if (('id' not in st.session_state) or (st.session_state['id']==None)) else (None)
         )
         st.text_input(
@@ -58,19 +64,46 @@ if(st.session_state['role'] == None):
         )
         with st.columns([0.25,0.5,0.25])[1]:
             if st.button("submit", type='primary', use_container_width=True):
+                st.session_state['userid'] = st.session_state['id']
+                st.session_state['password'] = st.session_state['pwd']
+                del st.session_state['id']
+                del st.session_state['pwd']
+                del st.session_state['btn']
                 st.session_state['role'] = 'admin' if (btn==1) else ('user')
                 st.rerun()
     elif(btn==3):
         st.text_input(
             label="**Full name**",
             key='name',
-            # value=None if (('name' not in st.session_state) or (st.session_state['name']==None)) else (st.session_state['name']),
+            value=None if (('name' not in st.session_state) or (st.session_state['name']==None)) else (st.session_state['name']),
             placeholder="enter your full name"
         )
-        st.text_input(label="**Unique employee ID**", key='eid', placeholder="enter your unique employee id")
-        st.selectbox(label="**Choose your role**", options=['Admin','User'], key='reg_role', index=None, placeholder='choose an option')
-        st.text_input(label="**Create your login ID**", key='uid', placeholder="id")
-        st.text_input(label="**Create your Password**", key='pwd', placeholder="password", type="password")
+        st.text_input(
+            label="**Unique employee ID**",
+            key='eid',
+            value=None if (('eid' not in st.session_state) or (st.session_state['eid']==None)) else (st.session_state['eid']),
+            placeholder="enter your unique employee id"
+        )
+        st.radio(
+            label="**Choose your role**",
+            options=['Admin','User'],
+            key='reg_role',
+            index=None,
+            horizontal=True
+        )
+        st.text_input(
+            label="**Create your login ID**",
+            key='uid',
+            value=None if (('uid' not in st.session_state) or (st.session_state['uid']==None)) else (st.session_state['uid']),
+            placeholder="id"
+        )
+        st.text_input(
+            label="**Create your Password**",
+            key='pwd',
+            value=None if (('pwd' not in st.session_state) or (st.session_state['pwd']==None)) else (st.session_state['pwd']),
+            placeholder="password",
+            type="password"
+        )
         with st.columns([0.25,0.5,0.25])[1]:
             if st.button("submit", type='primary', use_container_width=True):
                 st.session_state.clear()
