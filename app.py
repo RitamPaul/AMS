@@ -1,15 +1,17 @@
 import streamlit as st
 import os
 
+if not st.session_state:
+    st.set_page_config(layout = 'centered')
+
 for attrib in ['role','username','password']:       # NONE type initialisation
     if attrib not in st.session_state:
         st.session_state[attrib] = None
 if 'ind' not in st.session_state:                   # BOOL type initialisation
     st.session_state['ind'] = True
-if 'department' not in st.session_state:            # LIST type initialisation
-    st.session_state['department'] = ['Airport Operations', 'Air Traffic Control (ATC)', 'Security', 'Customs & Immigrations', 'Ground Handling Services', 'Terminal Management', 'Passenger Services', 'Engineering & Maintenance', 'Cargo Operations', 'Airlines Offices', 'Fire & Rescue Service', 'Medical Service', 'Finance & Accounts', 'Human Resources', 'Parking & Ground Transportation']
-    st.session_state['department'].sort()
 ind = st.session_state['ind']
+department = ['Airport Operations', 'Air Traffic Control (ATC)', 'Security', 'Customs & Immigrations', 'Ground Handling Services', 'Terminal Management', 'Passenger Services', 'Engineering & Maintenance', 'Cargo Operations', 'Airlines Offices', 'Fire & Rescue Service', 'Medical Service', 'Finance & Accounts', 'Human Resources', 'Parking & Ground Transportation']
+department.sort()
 
 # login page
 if(st.session_state['role'] == None):
@@ -123,7 +125,7 @@ if(st.session_state['role'] == None):
         st.selectbox(
             label="**Department**",
             key=f'dept-{ind}',
-            options=st.session_state['department'],
+            options=department,
             index=None,
             placeholder="enter your department"
         )
@@ -178,7 +180,7 @@ settings_page = st.Page("3_settings.py", title="Settings", icon=":material/setti
 deleteaccount_page = st.Page("4_deleteaccount.py", title="Delete account", icon=":material/delete:")
 
 allocatetask_page = st.Page("1 Admin/allocatetask.py", title="Allocate task", icon="🛠️")
-assetapproval_page = st.Page("1 Admin/assetapproval.py", title="Approve asset requests", icon="🫱🏻‍🫲🏻")
+assetapproval_page = st.Page("1 Admin/assetapproval.py", title="Approve asset requests", icon="🤝")
 
 assetrequest_page = st.Page("2 User/assetrequest.py", title="Asset request", icon=":material/storefront:")
 onlyformetask_page = st.Page("2 User/onlyformetask.py", title="Only for me task", icon=":material/accessibility:")
@@ -187,8 +189,8 @@ raiseissue_page = st.Page("2 User/raiseissue.py", title="Raise issue", icon=":ma
 sidebar_list = {}
 if(st.session_state['role'] == 'admin'):
     sidebar_list['Account'] = [profile_page, settings_page, deleteaccount_page, logout_page]
-    sidebar_list['Admin privileges'] = [assetrequest_page, raiseissue_page]
-    sidebar_list['Work'] = [allocatetask_page, assetapproval_page]
+    sidebar_list['Admin privileges'] = [allocatetask_page, assetapproval_page]
+    sidebar_list['Work'] = [assetrequest_page, raiseissue_page]
 elif(st.session_state['role'] == 'user'):
     sidebar_list['Account'] = [profile_page, settings_page, deleteaccount_page, logout_page]
     sidebar_list['Work'] = [assetrequest_page, onlyformetask_page, raiseissue_page]
