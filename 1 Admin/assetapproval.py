@@ -9,9 +9,7 @@ st.markdown(
     font-weight:bolder;
     font-family:verdana;
     ">
-    TASK ACTIVITIES
+    APPROVE ASSET REQUESTS
     </p>''',
     unsafe_allow_html = True
 )
-
-st.session_state

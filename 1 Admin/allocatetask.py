@@ -9,11 +9,9 @@ st.html(
     font-weight:bolder;
     font-family:verdana;
     ">
-    ALLOCATE TASKS
+    ALLOCATE TASK
     </p>'''
 )
-
-st.session_state
 
 ind = st.session_state['ind']
 

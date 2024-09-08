@@ -1,3 +1,3 @@
 import streamlit as st
 
-st.subheader("**Workers will raise issues if found anywhere**")
+st.subheader("**Upload any issue if found anywhere**")
