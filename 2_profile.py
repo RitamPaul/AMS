@@ -17,5 +17,3 @@ st.markdown(
     </p>''',
     unsafe_allow_html = True
 )
-
-st.session_state
