@@ -9,7 +9,7 @@ st.markdown(
     font-weight:bolder;
     font-family:verdana;
     ">
-    APPROVE ASSET REQUESTS
+    ISSUE ACTIVITIES
     </p>''',
     unsafe_allow_html = True
 )
