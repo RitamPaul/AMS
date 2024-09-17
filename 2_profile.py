@@ -1,4 +1,6 @@
 import streamlit as st
+from PIL import Image
+import PIL
 
 st.markdown(
     '''<p style="
@@ -13,3 +15,8 @@ st.markdown(
     </p>''',
     unsafe_allow_html = True
 )
+
+profilepic = Image.open('./resources/images/rp_circularlogo.jpg')
+with st.columns([0.4,0.2,0.4], gap='small', vertical_alignment='center')[1]:
+    st.image(image=profilepic)
+

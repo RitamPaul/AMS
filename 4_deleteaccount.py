@@ -12,7 +12,7 @@ st.markdown(
     '''<p style="
     color:blue;
     text-align:center;
-    letter-spacing:9px;
+    letter-spacing:7px;
     font-size:50px;
     font-weight:bolder;
     font-family:verdana;
@@ -29,7 +29,7 @@ st.subheader("\n")
 col1, col2 = st.columns([0.7,0.3], gap='small', vertical_alignment='center')
 
 with col1:
-    st.subheader("**Type 'CONTINUE' here to confirm your account deletion 👉**")
+    st.subheader("**Type 'CONTINUE' here to confirm your action 👉**")
 
 with col2:
     st.text_input(
@@ -43,6 +43,7 @@ with col2:
 entry = st.session_state[f'entry-{ind}']
 del st.session_state[f'entry-{ind}']
 
+st.subheader("\n")
 st.subheader("\n")
 with st.columns([0.3,0.4,0.3], gap='small', vertical_alignment='center')[1]:
     if st.button("submit", type='primary', use_container_width=True):
