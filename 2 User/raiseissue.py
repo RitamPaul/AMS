@@ -58,17 +58,9 @@ st.text_input(
     placeholder='building no. / floor no. / room no.'
 )
 
-# # specific employee to allocate task
-# st.multiselect(
-#     label='**Specific employee to alocate task** (if any)',
-#     key=f'ADMINallocatetask-{ind}',
-#     options=[""],
-#     placeholder='employee names will go here'
-# )
-
 # issue % completion
 st.slider(
-    label='**Completion percentage (%)**',
+    label='**Asset workable percentage (%)**',
     key=f'issuecomplete-{ind}',
     value=0,
     min_value=0,

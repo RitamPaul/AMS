@@ -26,7 +26,7 @@ st.subheader("\n")
 st.write("**⚠️Note : Keep in mind that your account will be permanently deleted and your data can never be retrieved**")
 st.subheader("\n")
 
-col1, col2 = st.columns([0.7,0.3], gap='small', vertical_alignment='center')
+col1, col2 = st.columns([0.66,0.34], gap='small', vertical_alignment='center')
 
 with col1:
     st.subheader("**Type 'CONTINUE' here to confirm your action 👉**")
